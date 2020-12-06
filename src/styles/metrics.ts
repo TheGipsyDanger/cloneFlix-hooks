@@ -1,13 +1,15 @@
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 import { getStatusBarHeight, isIphoneX } from 'react-native-iphone-x-helper';
-import normalize from './../utils/sizeHelper';
 
-const { height, width } = Dimensions.get('window');
+const headerHeight = isIphoneX() ? 64 + getStatusBarHeight() : 64;
 
 export default {
-  height: height,
-  width: width,
-  defaultSpace: (multiplier = 1) => normalize(8 * multiplier),
-  header: isIphoneX() ? 44 + getStatusBarHeight() : 44,
-  normalize: normalize,
+  height: Dimensions.get('window').height,
+  width: Dimensions.get('window').width,
+  header: headerHeight,
+  spotlight: isIphoneX()
+    ? headerHeight +
+      getStatusBarHeight() +
+      Dimensions.get('window').height / 1.5
+    : headerHeight + Dimensions.get('window').height / 1.5,
 };

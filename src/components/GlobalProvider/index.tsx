@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { InitialProvider, ModalProvider } from '../../hooks';
+import { InitialProvider, ModalProvider, SeriesProvider } from '../../hooks';
 
 const GlobalProvider: React.FC = ({ children }) => {
   return (
     <ModalProvider>
-      <InitialProvider>{children}</InitialProvider>
+      <SeriesProvider>
+        <InitialProvider>{children}</InitialProvider>
+      </SeriesProvider>
     </ModalProvider>
   );
 };

@@ -1,9 +1,22 @@
 import React from 'react';
-import data from './data';
+import IHome from './data';
 import Layout from './Layout';
+import { Animated } from 'react-native';
 
-const Home: React.FC = props => {
-  return <Layout {...props} data={data} />;
-};
+export default function Home(props: IHome) {
+  const translateY = new Animated.Value(0);
+  // @ts-ignore
+  const animatedEvent = new Animated.event<any>([
+    {
+      nativeEvent: {
+        contentOffset: {
+          y: translateY,
+        },
+      },
+    },
+  ]);
 
-export default Home;
+  return (
+    <Layout {...props} animatedEvent={animatedEvent} translateY={translateY} />
+  );
+}
